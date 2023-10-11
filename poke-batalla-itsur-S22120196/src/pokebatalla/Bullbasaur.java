@@ -4,18 +4,10 @@
  */
 package pokebatalla;
 
-import java.util.List;
-
 /**
  *
  * @author FJML1983
  */
-public class Pokemon {
-    int nivel;
-    int hp;
-    int ataque;
-    int defensa;
-    double precision;
-    String tipo;
-    List<String> habilidades;
+public class Bullbasaur extends Pokemon{
+    
 }

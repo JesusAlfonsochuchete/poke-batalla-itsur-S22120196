@@ -4,18 +4,18 @@
  */
 package pokebatalla;
 
-import java.util.List;
-
 /**
  *
- * @author FJML1983
+ * @author Jesus Alfonso
  */
-public class Pokemon {
-    int nivel;
-    int hp;
-    int ataque;
-    int defensa;
-    double precision;
+public class Movimiento {
     String tipo;
-    List<String> habilidades;
+    String dase;
+    int potencia;
+    int precision;
+    int puntosdepoder;
+    
+    
+    
+    
 }
