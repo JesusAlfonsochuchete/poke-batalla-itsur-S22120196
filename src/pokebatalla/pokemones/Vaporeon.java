@@ -4,8 +4,13 @@
  */
 package pokebatalla.pokemones;
 
-import pokebatalla.*;
-import java.util.List;
+import pokebatalla.movimiento.Malicioso;
+import pokebatalla.movimiento.Movimiento;
+import pokebatalla.movimiento.PISTOLAAGUA;
+import pokebatalla.movimiento.Triple_inmersión;
+
+
+
 
 /**
  *
@@ -13,9 +18,15 @@ import java.util.List;
  */
 public class Vaporeon extends Pokemon {
 
-    String ataqueespecial;
+    public enum Movimientos{
+        PISTOLA_AGUA,
+        Malicioso,
+        Triple_inmersión,
+    }
+    
+   public String ataqueespecial;
 
-    Vaporeon() {
+    public Vaporeon() {
         this.tipo = "AGUA";
         this.hp = 130;
         this.ataque = 65;
@@ -23,66 +34,48 @@ public class Vaporeon extends Pokemon {
         this.nivel = 1;
         this.precision = 4;
     }
-public Vaporeon(String nombre){
-    this();
-    this.nombre = nombre;
-}    
 
-    public int getNivel() {
-        return nivel;
+    //Constructor alterno 1
+    public Vaporeon(String nombre) {
+        this(); //invocando al constructor default
+        this.nombre = nombre;
     }
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
+    //METODOS 
+    @Override
+    public Enum[] getMovimientos() {
+        return Vaporeon.Movimientos.values();
     }
 
-    public int getHp() {
-        return hp;
-    }
+    @Override
+    public void atacar(Pokemon oponente, int ordinalMovimiento) {
 
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
+        if (this.hp <= 0) {
+            System.out.println("Charmander. esta agotado y no puede realizar mas movimientos.");
+            return;
+        }
 
-    public int getAtaque() {
-        return ataque;
-    }
+        Vaporeon.Movimientos movimientoAUtilizar = Vaporeon.Movimientos.values()[ordinalMovimiento];
 
-    public void setAtaque(int ataque) {
-        this.ataque = ataque;
-    }
+        //Instanciar el movimiento solicitado
+        Movimiento instanciaMovimiento;
+        switch (movimientoAUtilizar) {
+            case Malicioso:
+                instanciaMovimiento = new Malicioso();
+                break;
+            case PISTOLA_AGUA:
+                instanciaMovimiento = new PISTOLAAGUA();
+                break;
+            case Triple_inmersión:
+                instanciaMovimiento = new Triple_inmersión();
+                break;
+                    
+            default:
+                throw new AssertionError();
+        }
 
-    public int getDefensa() {
-        return defensa;
-    }
+        instanciaMovimiento.utilizar(this, oponente);
 
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
     }
-
-    public double getPrecision() {
-        return precision;
-    }
-
-    public void setPrecision(double precision) {
-        this.precision = precision;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public List<String> getHabilidades() {
-        return habilidades;
-    }
-
-    public void setHabilidades(List<String> habilidades) {
-        this.habilidades = habilidades;
-    }
-    
 
 }

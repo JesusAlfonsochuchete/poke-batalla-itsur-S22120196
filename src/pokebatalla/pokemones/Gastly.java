@@ -4,18 +4,29 @@
  */
 package pokebatalla.pokemones;
 
-import pokebatalla.*;
-import java.util.List;
+import pokebatalla.movimiento.CargaTóxica;
+import pokebatalla.movimiento.Movimiento;
+import pokebatalla.movimiento.Puya_nociva;
+import pokebatalla.movimiento.Rabia;
+
+
 
 /**
  *
  * //@JESUS ALFONSO MARTINEZ MARTINEZ
  */
 public class Gastly extends Pokemon {
-
-    String ataqueespecial;
     
-    Gastly(){
+
+    public enum Movimientos{
+        CARGATOXICA,
+        PuyaNociva,
+        Rabia,
+        
+    }
+    public String ataqueespecial;
+    
+    public Gastly(){
         this.tipo= "FANTASMA/VENENO";
         this.hp = 30;
         this.ataque= 35;
@@ -23,69 +34,47 @@ public class Gastly extends Pokemon {
         this.nivel= 1;
         this.precision= 5;
     }
-    public Gastly(String nombre){
-        this();
-        this.nombre= nombre;
+     //Constructor alterno 1
+    public Gastly(String nombre) {
+        this(); //invocando al constructor default
+        this.nombre = nombre;
     }
 
-    public String getNombre() {
-        return nombre;
+    //METODOS 
+    @Override
+    public Enum[] getMovimientos() {
+        return Gastly.Movimientos.values();
     }
 
-    public int getNivel() {
-        return nivel;
+    @Override
+    public void atacar(Pokemon oponente, int ordinalMovimiento) {
+
+        if (this.hp <= 0) {
+            System.out.println("Gastly esta agotado y no puede realizar mas movimientos.");
+            return;
+        }
+
+        Gastly.Movimientos movimientoAUtilizar = Gastly.Movimientos.values()[ordinalMovimiento];
+
+        //Instanciar el movimiento solicitado
+        Movimiento instanciaMovimiento;
+        switch (movimientoAUtilizar) {
+            case CARGATOXICA:
+                instanciaMovimiento = new CargaTóxica();
+                break;
+            case  PuyaNociva:
+                instanciaMovimiento = new Puya_nociva();
+                break;
+            case Rabia:
+                instanciaMovimiento = new Rabia();
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        instanciaMovimiento.utilizar(this, oponente);
+
     }
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
+}
 
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public int getAtaque() {
-        return ataque;
-    }
-
-    public void setAtaque(int ataque) {
-        this.ataque = ataque;
-    }
-
-    public int getDefensa() {
-        return defensa;
-    }
-
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
-    }
-
-    public double getPrecision() {
-        return precision;
-    }
-
-    public void setPrecision(double precision) {
-        this.precision = precision;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public List<String> getHabilidades() {
-        return habilidades;
-    }
-
-    public void setHabilidades(List<String> habilidades) {
-        this.habilidades = habilidades;
-    }
-    
-   }

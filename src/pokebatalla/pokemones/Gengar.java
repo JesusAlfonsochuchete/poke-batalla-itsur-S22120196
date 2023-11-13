@@ -4,17 +4,27 @@
  */
 package pokebatalla.pokemones;
 
-import pokebatalla.*;
-import java.util.List;
+
+import pokebatalla.movimiento.CargaTóxica;
+import pokebatalla.movimiento.Lenguetazo;
+import pokebatalla.movimiento.Movimiento;
+import pokebatalla.movimiento.Toxica;
+
+
 
 /**
  *
  *///@JESUS ALFONSO MARTINEZ MARTINEZ
  //
 public class Gengar extends Pokemon {
-
-    String ataqueespecial;
-    Gengar(){
+public enum Movimientos{
+        CARGATOXICA,
+        LENGUETAZO,
+        Toxico,
+    }
+    public Gengar(){
+        
+        
         this.tipo= "FANTASMA/VENENO";
         this.hp = 60;
         this.ataque = 65;
@@ -22,73 +32,47 @@ public class Gengar extends Pokemon {
         this.nivel = 1;
         this.precision = 7;
     }
-public Gengar(String nombre){
-    this();
-    this.nombre = nombre;
-}    
 
-    public Gengar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    //Constructor alterno 1
+    public Gengar(String nombre) {
+        this(); //invocando al constructor default
+        this.nombre = nombre;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
+    //METODOS 
+    @Override
+    public Enum[] getMovimientos() {
+        return Gengar.Movimientos.values();
     }
 
-    public int getHp() {
-        return hp;
-    }
+    @Override
+    public void atacar(Pokemon oponente, int ordinalMovimiento) {
 
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
+        if (this.hp <= 0) {
+            System.out.println("Charmander. esta agotado y no puede realizar mas movimientos.");
+            return;
+        }
 
-    public int getAtaque() {
-        return ataque;
-    }
+        Gengar.Movimientos movimientoAUtilizar = Gengar.Movimientos.values()[ordinalMovimiento];
 
-    public void setAtaque(int ataque) {
-        this.ataque = ataque;
-    }
+        //Instanciar el movimiento solicitado
+        Movimiento instanciaMovimiento;
+        switch (movimientoAUtilizar) {
+            case LENGUETAZO:
+                instanciaMovimiento = new Lenguetazo();
+                break;
+            case CARGATOXICA:
+                instanciaMovimiento = new CargaTóxica();
+                break;
+            case Toxico:
+                instanciaMovimiento = new Toxica();
+                break;
+            default:
+                throw new AssertionError();
+        }
 
-    public int getDefensa() {
-        return defensa;
-    }
+        instanciaMovimiento.utilizar(this, oponente);
 
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
     }
-
-    public double getPrecision() {
-        return precision;
-    }
-
-    public void setPrecision(double precision) {
-        this.precision = precision;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public List<String> getHabilidades() {
-        return habilidades;
-    }
-
-    public void setHabilidades(List<String> habilidades) {
-        this.habilidades = habilidades;
-    }
-
 
 }

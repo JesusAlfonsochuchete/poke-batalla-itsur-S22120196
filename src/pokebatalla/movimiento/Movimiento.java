@@ -10,10 +10,9 @@ import pokebatalla.pokemones.Pokemon;
  *
  * @author Jesus Alfonso
  */
-public class Movimiento {
-    
-    enum tiposdemovimiento{
-        ///PRIMERA GENERACION
+public abstract class Movimiento {
+
+    enum TiposDeMovimiento {
         AGUA,
         BICHO,
         DRAGON,
@@ -29,22 +28,16 @@ public class Movimiento {
         SINIESTRO,
         TIERRA,
         VENENO,
-        VOLADOR
-        //Segunda generacion
-        
+        VOLADOR,     
     }
-    protected tiposdemovimiento tipo;
-    protected String clase;
+
+    //Atributos
+    protected TiposDeMovimiento tipo;
     protected int potencia;
     protected int precision;
-    protected int puntosdepoder;
-    
-    public void utilizar(Pokemon usuario, Pokemon objetivo){
-                                                                                                
-        
-                            
-    }
-    
-    
-    
+    protected int puntosPoder;
+
+    //Métodos
+    public abstract void utilizar(Pokemon usuario, Pokemon objetivo);
+  
 }
