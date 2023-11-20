@@ -13,6 +13,8 @@ public class NieblaClara extends movimientoespecial {
      this.tipo=TiposDeMovimiento.FANTASMA;
      this.potencia = 50;
      this.precision = 0;
-     this.puntosPoder = 15;
- }    
+     this.puntosPoder = 16;
+ 
+ }
 }
+

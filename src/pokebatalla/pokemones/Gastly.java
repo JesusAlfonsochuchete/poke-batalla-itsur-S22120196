@@ -9,11 +9,10 @@ import pokebatalla.movimiento.Movimiento;
 import pokebatalla.movimiento.Puya_nociva;
 import pokebatalla.movimiento.Rabia;
 
-
-
+        
 /**
  *
- * //@JESUS ALFONSO MARTINEZ MARTINEZ
+ * @JESUS ALFONSO MARTINEZ MARTINEZ
  */
 public class Gastly extends Pokemon {
     

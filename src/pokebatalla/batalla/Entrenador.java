@@ -6,7 +6,7 @@ package pokebatalla.batalla;
 
 /**
  *
- * @author ADMIN
+ * @author JESUS ALFONSO MARTINEZ MARTINEZ
  */
 import java.util.ArrayList;
 import java.util.List;

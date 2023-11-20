@@ -17,7 +17,7 @@ import pokebatalla.batalla.Entrenador;
 public class Main {
        
     /**
-     * @param args the command line arguments
+     * @JESUS ALFONSO MARTINEZ MARTINEZ
      */
     public static void main(String[] args) {
       Gastly g = new Gastly("TITO");

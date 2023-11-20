@@ -11,7 +11,7 @@ import pokebatalla.pokemones.Pokemon;
 
 /**
  *
- * @author ADMIN
+ * @author JESUS ALFONSO MARTINEZ MARTINEZ
  */
 public class Batalla1 {
       protected Entrenador entrenador1;
@@ -32,9 +32,24 @@ public class Batalla1 {
         System.out.println(entrenador1.getNombre() + "    V.S   " + entrenador2.getNombre());
 
         System.out.println("");
+       do {
+            try {
+                eligirPokemon(entrenador1);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Solo puedes elegir entre  " + "[" + entrenador1.getPokemonsCapturados().size() + "]" + "  Elige alguno de tus Pokemons");
+                entrenador1.setPokemonActual(null);
+            }
+        } while (entrenador1.getPokemonActual() == null);
 
-        eligirPokemon(entrenador1);
-        eligirPokemon(entrenador2);
+        do {
+            try {
+                eligirPokemon(entrenador2);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Solamente cuentas con:  " + "("+ entrenador2.getPokemonsCapturados().size() + ")" + "  Elige alguno de tus Pokemons");
+                entrenador2.setPokemonActual(null);
+            }
+        } while (entrenador2.getPokemonActual() == null);
+        
 
         while (!batallaFinalizada) {
             Entrenador entrenadorEnTurno = (turno == 1) ? entrenador1 : entrenador2;
@@ -42,11 +57,11 @@ public class Batalla1 {
 
             System.out.println("Turno del entrenador: " + entrenadorEnTurno.getNombre());
 
-            // Asegurarse de que el Pokemon actual esté seleccionado
+           
             if (entrenadorEnTurno.getPokemonActual() == null || entrenadorEnTurno.getPokemonActual().gethp() <= 0) {
                 cambiarPokemon(entrenadorEnTurno);
             }
-            // Asegurarse de que el oponente tenga un Pokemon actual
+            
             if (oponente.getPokemonActual() == null) {
                 System.out.println("No hay un Pokémon  seleccionado para el oponente");
                 return;
@@ -91,7 +106,7 @@ public class Batalla1 {
         entrenadorEnturno.setPokemonActual(pokemonSeleccionado);
     }
 
-   //Metodo para atacar
+  
     private void seleccionarAtaque(Entrenador entrenadorEnturno, Pokemon oponente) {
 
         Pokemon pokemonActual = entrenadorEnturno.getPokemonActual();
@@ -121,7 +136,7 @@ public class Batalla1 {
             return;
         }
 
-        //llamar al metodo instruirMovimientoAlPokemonActual
+       
         entrenadorEnturno.instruirMovimientoAlPokemonActual(oponente, opcionAtaque - 1);
     }
 
@@ -131,13 +146,17 @@ public class Batalla1 {
 
         char respuesta = 'N';
 
-        try {
-            respuesta = (char) System.in.read();
-            System.in.read((new byte[System.in.available()]));
-        } catch (IOException ex) {
-            ex.printStackTrace();
+           while (true) {
+            try {
+                respuesta = (char) System.in.read();
+                System.in.read((new byte[System.in.available()]));
+                break;  // Salir  si no hay excepciones
+            } catch (IOException ex) {
+                System.out.println("Error de entrada o salida al leer la respuesta. Intenta de nuevo.");
+                ex.printStackTrace();
+            }
         }
-
+           
         if (respuesta == 'S' || respuesta == 's') {
 
             System.out.println("Pokémon disponibles:");
@@ -159,12 +178,19 @@ public class Batalla1 {
                 ex.printStackTrace();
             }
 
-            Pokemon nuevoPokemon = entrenador.getPokemonsCapturados().get(Character.getNumericValue(auxLectura) - 1);
-            entrenador.setPokemonActual(nuevoPokemon);
+             int indicePokemonNuevo = Character.getNumericValue(auxLectura) - 1;
 
-            System.out.println("Has cambiado a " + nuevoPokemon.getClass().getSimpleName() + " en tu equipo.");
-        }
+            
+            if (indicePokemonNuevo >= 0 && indicePokemonNuevo < entrenador.getPokemonsCapturados().size()) {
+                Pokemon nuevoPokemon = entrenador.getPokemonsCapturados().get(indicePokemonNuevo);
+                entrenador.setPokemonActual(nuevoPokemon);
+                System.out.println("Has elegido al pokemon " + nuevoPokemon.getClass().getSimpleName() + " en tu equipo.");
+            } else {
+                System.out.println("La opción no ha sido valida, trata de nuevo con un nuevo digito.");
+            }
+    }
     }
 }
+
   
 
