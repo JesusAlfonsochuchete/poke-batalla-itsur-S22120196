@@ -8,11 +8,12 @@ package pokebatalla.batalla;
  *
  * @author JESUS ALFONSO MARTINEZ MARTINEZ
  */
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import pokebatalla.pokemones.Pokemon;
 
-public class Entrenador {
+public class Entrenador implements Serializable{
 
     protected String nombre;
     protected List<Pokemon> pokemonsCapturados;

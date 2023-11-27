@@ -8,7 +8,7 @@ import pokebatalla.movimiento.Malicioso;
 import pokebatalla.movimiento.Movimiento;
 import pokebatalla.movimiento.PISTOLAAGUA;
 import pokebatalla.movimiento.Triple_inmersión;
-
+import java.io.Serializable;
 
 
 
@@ -16,7 +16,7 @@ import pokebatalla.movimiento.Triple_inmersión;
  *
  * @//@JESUS ALFONSO MARTINEZ MARTINEZ
  */
-public class Vaporeon extends Pokemon {
+public class Vaporeon extends Pokemon implements Serializable {
 
     public enum Movimientos{
         PISTOLA_AGUA,

@@ -7,13 +7,15 @@ package pokebatalla.batalla;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
+import pokebatalla.control.Elmeromero;
 import pokebatalla.pokemones.Pokemon;
 
 /**
  *
  * @author JESUS ALFONSO MARTINEZ MARTINEZ
  */
-public class Batalla1 {
+public class Batalla1 implements Serializable {
       protected Entrenador entrenador1;
     protected Entrenador entrenador2;
     protected int turno = 1;
@@ -24,8 +26,15 @@ public class Batalla1 {
     public Batalla1(Entrenador entrenador1, Entrenador entrenador2) {
         this.entrenador1 = entrenador1;
         this.entrenador2 = entrenador2;
+        
+    }
+    public boolean Victorioso() {
+        return (entrenador1.estaDerrotado() || entrenador2.estaDerrotado());
     }
 
+    public void salvarProgreso() {
+        Elmeromero.gPart(this);
+    }
     public void desarrollarBatalla() {
         System.out.println("La batalla a empezado");
         System.out.println("Los que pelearan son: ");
@@ -86,9 +95,10 @@ public class Batalla1 {
     private void eligirPokemon(Entrenador entrenadorEnturno) {
         int idx = 1;
         for (Pokemon pokemon : entrenadorEnturno.getPokemonsCapturados()) {
-            System.out.println(idx + ".- " + pokemon.getClass().getSimpleName());
+            System.out.println(idx + ".- " + pokemon.getClass().getSimpleName() + " hp: " + pokemon.gethp() + "  defensa: " + pokemon.getDefensa() + "  nivel: " + pokemon.getNivel());
             idx++;
         }
+        
         System.out.println("");
         System.out.println("Elige un  pokemon " + entrenadorEnturno.getNombre());
 

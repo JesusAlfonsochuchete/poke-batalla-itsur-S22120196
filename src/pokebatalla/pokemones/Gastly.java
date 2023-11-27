@@ -8,13 +8,13 @@ import pokebatalla.movimiento.CargaTóxica;
 import pokebatalla.movimiento.Movimiento;
 import pokebatalla.movimiento.Puya_nociva;
 import pokebatalla.movimiento.Rabia;
-
+import java.io.Serializable;
         
 /**
  *
  * @JESUS ALFONSO MARTINEZ MARTINEZ
  */
-public class Gastly extends Pokemon {
+public class Gastly extends Pokemon implements Serializable {
     
 
     public enum Movimientos{

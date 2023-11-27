@@ -7,35 +7,78 @@ package pokebatalla.pokemones;
 //En este programa puse la mayoria de las cosas no supe muy bien somo poner los ataques 
 
 
+import java.io.Serializable;
 import pokebatalla.batalla.Batalla1;
 import pokebatalla.batalla.Entrenador;
-
+import pokebatalla.control.Elmeromero;
+import java.io.IOException;
 
 
 
 //Es cuestion de al momento que pongamos un pokemon al mismo tiempo pongamos su ataque especial
-public class Main {
-       
+public class Main implements Serializable {
+        
     /**
      * @JESUS ALFONSO MARTINEZ MARTINEZ
      */
     public static void main(String[] args) {
-      Gastly g = new Gastly("TITO");
-      Gengar g1 = new Gengar("FEO");
-      Vaporeon v = new Vaporeon("ETE SECH");
-      
-      Entrenador en1 = new Entrenador("Cris");
-      en1.capturarPokemon(v);
-      en1.capturarPokemon(g);
-      
-      Entrenador en2 = new Entrenador("AlAN");
-      en2.capturarPokemon(g1);
-      en2.capturarPokemon(g);
-      
-      Batalla1 z = new Batalla1(en1, en2);
-        z.desarrollarBatalla();
-        
-        
+
+        Batalla1 j = Elmeromero.cPart();
+
+        if (j == null) {
+            Gastly g = new Gastly("TITO");
+            Gengar g1 = new Gengar("FEO");
+            Vaporeon v = new Vaporeon("ETE SECH");
+
+            Entrenador en1 = new Entrenador("Cris");
+            en1.capturarPokemon(g);
+            en1.capturarPokemon(v);
+
+            Entrenador en2 = new Entrenador("Alan");
+            en2.capturarPokemon(g1);
+            en2.capturarPokemon(g);
+
+            j = new Batalla1(en1, en2);
+        }
+        j.desarrollarBatalla();
+
+        if (j.Victorioso()) {
+            System.out.println("Desea iniciar una nueva partida");
+
+            char respuesta = 'N';
+            try {
+                respuesta = (char) System.in.read();
+                System.in.read((new byte[System.in.available()]));
+            } catch (IOException ex) {
+                System.out.println("Error  "
+                        + "Intenta de nuevo.");
+                ex.printStackTrace();
+            }
+
+            if (respuesta == 'S' || respuesta == 's') {
+                // Borra el archivo de la partida guardada
+                Elmeromero.ePart();
+                //Pokemons 
+                Gastly g = new Gastly("TITO");
+                 Gengar g1 = new Gengar("FEO");
+                Vaporeon v = new Vaporeon("ETE SECH");
+                
+                Entrenador nuevoEntrenador1 = new Entrenador("Lupita");
+                nuevoEntrenador1.capturarPokemon(v);
+                nuevoEntrenador1.capturarPokemon(g);
+                
+                Entrenador nuevoEntrenador2 = new Entrenador("Chucho");
+                nuevoEntrenador2.capturarPokemon(g1);
+                nuevoEntrenador2.capturarPokemon(g);
+                
+
+                Batalla1 nuevaBatalla = new Batalla1(nuevoEntrenador1, nuevoEntrenador2);
+                nuevaBatalla.desarrollarBatalla();
+            }
+        }
+    }
+}
+   
         ///System.out.println("BIENVENIDOS AL VIDEOJUEGO POKEMON");                             
         /*Vaporeon Vp = new Vaporeon();//Instanciando
         Gastly G1 = new Gastly();// Instanciando
@@ -74,6 +117,5 @@ public class Main {
 
         
      
-    }
+    
 
-}

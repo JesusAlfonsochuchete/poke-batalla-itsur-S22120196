@@ -6,10 +6,11 @@ package pokebatalla.pokemones;
  *
  *@JESUS ALFONSO MARTINEZ MARTINEZ
  */
+import java.io.Serializable;
 import java.util.List;
 
 
-public abstract class Pokemon {
+public abstract class Pokemon implements Serializable {
 
         //Atributos
         protected String tipo;

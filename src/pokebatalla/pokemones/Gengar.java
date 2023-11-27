@@ -9,14 +9,14 @@ import pokebatalla.movimiento.CargaTóxica;
 import pokebatalla.movimiento.Lenguetazo;
 import pokebatalla.movimiento.Movimiento;
 import pokebatalla.movimiento.Toxica;
-
+import java.io.Serializable;
 
 
 /**
  *
  *///@JESUS ALFONSO MARTINEZ MARTINEZ
  //
-public class Gengar extends Pokemon {
+public class Gengar extends Pokemon implements Serializable {
 public enum Movimientos{
         CARGATOXICA,
         LENGUETAZO,
