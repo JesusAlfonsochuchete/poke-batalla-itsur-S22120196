@@ -13,7 +13,7 @@ import pokebatalla.pokemones.Pokemon;
 public class MovimientoFisico extends Movimiento {
     @Override
     public void utilizar(Pokemon usuario, Pokemon objetivo){
-        System.out.println("Aplicando movimiento Fisico");
+        System.out.println("Aplicando movimiento Fisico con unos buenos guamasos");
                 //Calcular el daño
         int nivelAtacante = usuario.getNivel();
         int ataqueAtacante = usuario.getAtaque();

@@ -51,7 +51,7 @@ public class Vaporeon extends Pokemon implements Serializable {
     public void atacar(Pokemon oponente, int ordinalMovimiento) {
 
         if (this.hp <= 0) {
-            System.out.println("Charmander. esta agotado y no puede realizar mas movimientos.");
+            System.out.println("Charmander. esta madreado y no puede realizar mas movimientos.");
             return;
         }
 

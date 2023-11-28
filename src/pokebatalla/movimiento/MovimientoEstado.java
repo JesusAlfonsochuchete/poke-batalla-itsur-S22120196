@@ -13,7 +13,7 @@ import pokebatalla.pokemones.Pokemon;
 public class MovimientoEstado extends Movimiento {
     @Override
     public void utilizar(Pokemon usuario, Pokemon objetivo){
-        System.out.println("Aplicando movimiento de estado");
+        System.out.println("Aplicando movimiento de estado y no se que es esto joven pero es un ataque");
              //Calcular el daño
         int nivelAtacante = usuario.getNivel();
         int ataqueAtacante = usuario.getAtaque();

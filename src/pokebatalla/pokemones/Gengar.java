@@ -49,7 +49,7 @@ public enum Movimientos{
     public void atacar(Pokemon oponente, int ordinalMovimiento) {
 
         if (this.hp <= 0) {
-            System.out.println("Charmander. esta agotado y no puede realizar mas movimientos.");
+            System.out.println("Charmander. esta madreado a morir y eso que esta muerto y no puede realizar mas movimientos.");
             return;
         }
 

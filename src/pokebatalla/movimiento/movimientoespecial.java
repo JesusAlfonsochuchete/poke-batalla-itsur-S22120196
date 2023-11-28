@@ -13,7 +13,7 @@ import pokebatalla.pokemones.Pokemon;
 public class movimientoespecial extends Movimiento {
  @Override
  public void utilizar(Pokemon usuario, Pokemon objetivo){
-     System.out.println("Aplicando movimiento especial");
+     System.out.println("Aplicando movimiento especial que matara al pokemon xd");
              //Calcular el daño
         int nivelAtacante = usuario.getNivel();
         int ataqueAtacante = usuario.getAtaque();

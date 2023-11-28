@@ -49,7 +49,7 @@ public class Gastly extends Pokemon implements Serializable {
     public void atacar(Pokemon oponente, int ordinalMovimiento) {
 
         if (this.hp <= 0) {
-            System.out.println("Gastly esta agotado y no puede realizar mas movimientos.");
+            System.out.println("Gastly esta dormido no es cierto esta muerto :( y no puede realizar mas movimientos.");
             return;
         }
 
