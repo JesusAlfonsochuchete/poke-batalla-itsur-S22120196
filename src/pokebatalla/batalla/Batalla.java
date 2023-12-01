@@ -1,21 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package pokebatalla.batalla;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import pokebatalla.control.Elmeromero;
+import pokebatalla.control.FileManager;
 import pokebatalla.pokemones.Pokemon;
 
 /**
  *
  * @author JESUS ALFONSO MARTINEZ MARTINEZ
  */
-public class Batalla1 implements Serializable {
+public class Batalla implements Serializable {
       protected Entrenador entrenador1;
     protected Entrenador entrenador2;
     protected int turno = 1;
@@ -23,7 +20,7 @@ public class Batalla1 implements Serializable {
 
     private boolean primerAtaqueRealizado = false;
 
-    public Batalla1(Entrenador entrenador1, Entrenador entrenador2) {
+    public Batalla(Entrenador entrenador1, Entrenador entrenador2) {
         this.entrenador1 = entrenador1;
         this.entrenador2 = entrenador2;
         
@@ -33,7 +30,7 @@ public class Batalla1 implements Serializable {
     }
 
     public void salvarProgreso() {
-        Elmeromero.gPart(this);
+        FileManager.guardarPartida(this);
     }
     public void desarrollarBatalla() {
         System.out.println("La batalla a empezado");
@@ -65,28 +62,28 @@ public class Batalla1 implements Serializable {
             Entrenador oponente = (turno == 1) ? entrenador2 : entrenador1;
 
             System.out.println("Turno del entrenador: " + entrenadorEnTurno.getNombre());
-
-           
-            if (entrenadorEnTurno.getPokemonActual() == null || entrenadorEnTurno.getPokemonActual().gethp() <= 0) {
-                cambiarPokemon(entrenadorEnTurno);
-            }
             
             if (oponente.getPokemonActual() == null) {
                 System.out.println("No hay un Pokémon  seleccionado para el oponente");
                 return;
             }
+             seleccionarAtaque(entrenadorEnTurno, oponente.getPokemonActual());
+            if (entrenadorEnTurno.getPokemonActual() == null || entrenadorEnTurno.getPokemonActual().gethp() <= 0) {
+                cambiarPokemon(entrenadorEnTurno);
 
-            // Entrenador en turno elige ataque
-            //  se comento porque es muy molesto ponerlo en cada turno  ya nomas se deo cuando el pokemon es derrotado        cambiarPokemon(entrenadorEnTurno);
-            seleccionarAtaque(entrenadorEnTurno, oponente.getPokemonActual());
-
-            Pokemon pokemonEnTurno = entrenadorEnTurno.getPokemonActual();
+                // Repetir el turno del entrenador que no desea cambiar de Pokémon
+                while (entrenadorEnTurno.getPokemonActual() == null || entrenadorEnTurno.getPokemonActual().gethp() <= 0) {
+                    System.out.println("Este entrenador no puede avanzar sin cambiar de Pokémon.");
+                    cambiarPokemon(entrenadorEnTurno);
+                }
+            }
 
             if (oponente.estaDerrotado()) {
                 System.out.println("¡El entrenador " + oponente.getNombre() + " ha sido derrotado!");
-                batallaFinalizada = true;
+                System.out.println("LA BATALLA A FINALIZADO");
+                batallaFinalizada = true; 
             } else {
-                // Cambiar el turno
+                salvarProgreso();
                 turno = (turno == 1) ? 2 : 1;
             }
         }
@@ -94,9 +91,11 @@ public class Batalla1 implements Serializable {
 
     private void eligirPokemon(Entrenador entrenadorEnturno) {
         int idx = 1;
+        System.out.println("******************************");
         for (Pokemon pokemon : entrenadorEnturno.getPokemonsCapturados()) {
             System.out.println(idx + ".- " + pokemon.getClass().getSimpleName() + " hp: " + pokemon.gethp() + "  defensa: " + pokemon.getDefensa() + "  nivel: " + pokemon.getNivel());
             idx++;
+            System.out.println("********************************");
         }
         
         System.out.println("");
@@ -123,32 +122,38 @@ public class Batalla1 implements Serializable {
 
     
         System.out.println("Seleccione un ataque para " + pokemonActual.getClass().getSimpleName() + ":");
-
+        System.out.println("La densa de:  "+ pokemonActual.getDefensa());
+        System.out.println("Y su nivel es:  "+ pokemonActual.getNivel());
         int idx = 1;
-
+       
         for (Enum movimiento : pokemonActual.getMovimientos()) {
             System.out.println(idx + ".- " + movimiento);
             idx++;
         }
-        System.out.println("-----------------------------------------------------");
+        System.out.println("*------------------------------------------*");
 
         int opcionAtaque = -1;
+        while (true) {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String input = br.readLine();
             opcionAtaque = Integer.parseInt(br.readLine());
-        } catch (IOException | NumberFormatException ex) {
-            System.out.println("Por favor, ingrese un número válido.");
-            return;
+            if (opcionAtaque < 1 || opcionAtaque > pokemonActual.getMovimientos().length) {
+                    System.out.println("La opción de ataque no es válida. Inténtalo de nuevo.");
+                } else {
+                    break; 
+            }     
+        } catch (IOException ex) {
+            System.out.println("Error al leer la entrada. Inténtalo de nuevo.");
+            ex.printStackTrace();
+        }catch (NumberFormatException ex) {
+                System.out.println("Por favor, ingrese un número válido. Inténtalo de nuevo.");
+        } 
         }
-
-        if (opcionAtaque < 1 || opcionAtaque > pokemonActual.getMovimientos().length) {
-            System.out.println("La opción de ataque no es válida.");
-            return;
-        }
-
-       
         entrenadorEnturno.instruirMovimientoAlPokemonActual(oponente, opcionAtaque - 1);
+    
     }
+
 
     ///Cambiar pokemon
     private void cambiarPokemon(Entrenador entrenador) {
@@ -184,7 +189,7 @@ public class Batalla1 implements Serializable {
             try {
                 auxLectura = (char) System.in.read();
                 System.in.read((new byte[System.in.available()]));
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 

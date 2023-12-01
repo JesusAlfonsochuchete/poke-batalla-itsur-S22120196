@@ -28,7 +28,7 @@ public class Vaporeon extends Pokemon implements Serializable {
 
     public Vaporeon() {
         this.tipo = "AGUA";
-        this.hp = 130;
+        this.hp = 10;
         this.ataque = 65;
         this.defensa = 60;
         this.nivel = 1;

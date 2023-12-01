@@ -8,14 +8,14 @@ package pokebatalla.pokemones;
 
 
 import java.io.Serializable;
-import pokebatalla.batalla.Batalla1;
+import pokebatalla.batalla.Batalla;
 import pokebatalla.batalla.Entrenador;
-import pokebatalla.control.Elmeromero;
+import pokebatalla.control.FileManager;
 import java.io.IOException;
 
 
 
-//Es cuestion de al momento que pongamos un pokemon al mismo tiempo pongamos su ataque especial
+
 public class Main implements Serializable {
         
     /**
@@ -23,7 +23,7 @@ public class Main implements Serializable {
      */
     public static void main(String[] args) {
 
-        Batalla1 j = Elmeromero.cPart();
+        Batalla j = FileManager.cargarPartida();
 
         if (j == null) {
             Gastly g = new Gastly("TITO");
@@ -38,7 +38,7 @@ public class Main implements Serializable {
             en2.capturarPokemon(g1);
             en2.capturarPokemon(g);
 
-            j = new Batalla1(en1, en2);
+            j = new Batalla(en1, en2);
         }
         j.desarrollarBatalla();
 
@@ -57,7 +57,7 @@ public class Main implements Serializable {
 
             if (respuesta == 'S' || respuesta == 's') {
                 // Borra el archivo de la partida guardada
-                Elmeromero.ePart();
+                FileManager.eliminarPartida();
                 //Pokemons 
                 Gastly g = new Gastly("TITO");
                  Gengar g1 = new Gengar("FEO");
@@ -72,7 +72,7 @@ public class Main implements Serializable {
                 nuevoEntrenador2.capturarPokemon(g);
                 
 
-                Batalla1 nuevaBatalla = new Batalla1(nuevoEntrenador1, nuevoEntrenador2);
+                Batalla nuevaBatalla = new Batalla(nuevoEntrenador1, nuevoEntrenador2);
                 nuevaBatalla.desarrollarBatalla();
             }
         }

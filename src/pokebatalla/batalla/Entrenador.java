@@ -31,20 +31,24 @@ public class Entrenador implements Serializable{
 
 
     public void instruirMovimientoAlPokemonActual(Pokemon oponente, int ordinalMovimiento) {
-
+        try {
         if (pokemonActual == null) {
-            System.out.println("No se encuentra el pokemon");
-            return;
+            throw new NullPointerException("No hay un Pokémon actualmente seleccionado.");
+            
         }
 
         if (ordinalMovimiento < 0 || ordinalMovimiento >= pokemonActual.getMovimientos().length) {
-            System.out.println("El movimiento no es valido");
-            return;
+            throw new IllegalArgumentException("El ordinal de movimiento no es válido.");
+           
         }
 
         this.pokemonActual.atacar(oponente, ordinalMovimiento);
+    }catch (NullPointerException | IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
     }
-
 
     public boolean estaDerrotado() {
         for (Pokemon pokemon : pokemonsCapturados) {

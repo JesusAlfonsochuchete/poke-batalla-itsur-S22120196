@@ -27,7 +27,7 @@ public class Gastly extends Pokemon implements Serializable {
     
     public Gastly(){
         this.tipo= "FANTASMA/VENENO";
-        this.hp = 30;
+        this.hp = 5;
         this.ataque= 35;
         this.defensa= 30;
         this.nivel= 1;

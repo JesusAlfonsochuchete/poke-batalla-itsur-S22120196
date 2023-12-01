@@ -26,7 +26,7 @@ public enum Movimientos{
         
         
         this.tipo= "FANTASMA/VENENO";
-        this.hp = 60;
+        this.hp = 4;
         this.ataque = 65;
         this.defensa = 60;
         this.nivel = 1;
