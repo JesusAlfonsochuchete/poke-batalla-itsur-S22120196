@@ -25,7 +25,7 @@ public class Batalla implements Serializable {
         this.entrenador2 = entrenador2;
         
     }
-    public boolean Victorioso() {
+    public boolean HubounVictorioso() {
         return (entrenador1.estaDerrotado() || entrenador2.estaDerrotado());
     }
 
@@ -33,6 +33,7 @@ public class Batalla implements Serializable {
         FileManager.guardarPartida(this);
     }
     public void desarrollarBatalla() {
+        System.out.println("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
         System.out.println("La batalla a empezado");
         System.out.println("Los que pelearan son: ");
         System.out.println(entrenador1.getNombre() + "    V.S   " + entrenador2.getNombre());
@@ -80,7 +81,7 @@ public class Batalla implements Serializable {
 
             if (oponente.estaDerrotado()) {
                 System.out.println("¡El entrenador " + oponente.getNombre() + " ha sido derrotado!");
-                System.out.println("LA BATALLA A FINALIZADO");
+                System.out.println("'''''''''''''''''''LA BATALLA A FINALIZADO''''''''''''''");
                 batallaFinalizada = true; 
             } else {
                 salvarProgreso();
@@ -120,7 +121,7 @@ public class Batalla implements Serializable {
 
         Pokemon pokemonActual = entrenadorEnturno.getPokemonActual();
 
-    
+        System.out.println("'------------------------------------------------------'");
         System.out.println("Seleccione un ataque para " + pokemonActual.getClass().getSimpleName() + ":");
         System.out.println("La densa de:  "+ pokemonActual.getDefensa());
         System.out.println("Y su nivel es:  "+ pokemonActual.getNivel());

@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package pokebatalla.pokemones;
-      //@JESUS ALFONSO MARTINEZ MARTINEZ
-//En este programa puse la mayoria de las cosas no supe muy bien somo poner los ataques 
+     
+
 
 
 import java.io.Serializable;
@@ -12,8 +9,6 @@ import pokebatalla.batalla.Batalla;
 import pokebatalla.batalla.Entrenador;
 import pokebatalla.control.FileManager;
 import java.io.IOException;
-
-
 
 
 public class Main implements Serializable {
@@ -42,7 +37,7 @@ public class Main implements Serializable {
         }
         j.desarrollarBatalla();
 
-        if (j.Victorioso()) {
+        if (j.HubounVictorioso()) {
             System.out.println("Desea iniciar una nueva partida");
 
             char respuesta = 'N';
